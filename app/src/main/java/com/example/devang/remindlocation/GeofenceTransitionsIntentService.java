@@ -86,7 +86,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
             // Send notification and log the transition details.
             titleAddr = intent.getExtras().getString("address");
-            sendNotification(geofenceTransitionDetails);
+            sendNotification(titleAddr);
             Log.i(TAG, geofenceTransitionDetails);
         } else {
             // Log the error.
@@ -148,7 +148,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(),
                         R.drawable.ic_launcher))
                 .setColor(Color.RED)
-                .setContentTitle(titleAddr)
+                .setContentTitle(notificationDetails)
                 .setContentText(getString(R.string.geofence_transition_notification_text))
                 .setContentIntent(notificationPendingIntent);
 

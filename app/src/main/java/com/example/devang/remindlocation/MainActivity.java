@@ -128,7 +128,7 @@ public class MainActivity extends Activity implements  OnCompleteListener<Void>{
             return mGeofencePendingIntent;
         }
         Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
-        //intent.putExtra("address",resultAddr);
+        intent.putExtra("address",resultAddr);
 
         // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
         // addGeofences() and removeGeofences().
@@ -160,7 +160,9 @@ public class MainActivity extends Activity implements  OnCompleteListener<Void>{
         if(task.isSuccessful()){
             Toast.makeText(this, "Geofence added", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(this, "Geofence can not be added", Toast.LENGTH_SHORT).show();
+            String errorMessage = GeofenceErrorMessages.getErrorString(this, task.getException());
+            Log.w(TAG, errorMessage);
+            Toast.makeText(this, "Geofence can not be added"+errorMessage, Toast.LENGTH_SHORT).show();
         }
     }
 
